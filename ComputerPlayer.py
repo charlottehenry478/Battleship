@@ -1,1 +1,2 @@
-print("comp")
+from Player import Player
+    player1 = Player("comp")
