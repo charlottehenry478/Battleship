@@ -1,38 +1,68 @@
 class Player:
 
-    def __init__(self, t):
+    def __init__(self, t):  # constructor, type is human/computer and both grids
         self.type = t
+        rows, cols = (10, 10)
+        placeArr = [["~"] * cols] * rows
+        guessArr = [["~"] * cols] * rows
+
 
     def spacesOfShip(self, ship):  # helper method to determine the number of spaces each ship occupies
-        if (ship == "D" | ship == "Destroyer"):
+        if (ship == "D" or ship == "Destroyer"):
             return 2
-        elif (ship == "C" | ship == "Cruiser"):
+        elif (ship == "C" or ship == "Cruiser"):
             return 3
-        elif (ship == "S" | ship == "Submarine"):
+        elif (ship == "S" or ship == "Submarine"):
             return 3
-        elif (ship == "B" | ship == "Battleship"):
+        elif (ship == "B" or ship == "Battleship"):
             return 4
-        elif (ship == "A" | ship == "Aircraft Carrier"):
+        elif (ship == "A" or ship == "Aircraft Carrier"):
             return 5
 
     def placeShips(self, ship):  # places ships
         spaces = self.spacesOfShip(ship)
         xCoor = 0
         yCoor = 0
-        bool = True
-        while(bool):
+        horiz = True
+        loopRun = True
+
+        while(loopRun):
             if (self.type == "human"):
-                # user input
+                xCoor = input("Enter the x coordinate where ship starts")
+                yCoor = input("Enter the y coordinate where ship starts")
+                horiz = input("Is the ship horizontal? (True/False)")
             else:
-                # generate random numbers within grid
+                import random
+                xCoor = random.randint(0,9)
+                yCoor = random.randint(0,9)
+                direction = random.randint(0,1)
+                if (direction == 1):
+                    horiz == False
 
-            if(#ship does not fit):
+            inGrid = False
+            if (horiz == True & xCoor + spaces < 10):
+                inGrid == True
+            if (horiz == False & yCoor + spaces < 10):
+                inGrid == False
+
+            spaceEmpty = False
+            if (horiz == True):
+                for x in range(0,spaces):
+                    if self.placeArr[[xCoor + x] != "~"]:
+                        spaceEmpty = False
+                        break
+
+            if(inGrid | spaceEmpty == False ):
                 print("Error, ship does not fit")
+                continue
             else:
-                bool = False
-        # place ships here 
+                loopRun = False
+                if (horiz == True):
+                    for x in range(0,spaces):
+                        self.placeArr[xCoor + x] = ship
+                elif (horiz == False):
+                    for x in range(0,spaces):
+                        self.placeArr[yCoor + x] = ship
 
 
-    def makeMoves(self):
-
-
+   # def makeMoves(self):
