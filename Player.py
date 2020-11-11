@@ -1,13 +1,23 @@
-class Player:
-
 import random
 
-    def __init__(self, t):  # constructor, type is human/computer and both grids
-        self.type = t
-        rows, cols = (10, 10)
-        placeArr = [["~"] * cols] * rows
-        guessArr = [["~"] * cols] * rows
+class Player:
 
+    def __init__(self):
+        rows, cols = (10, 10)
+        self.placeArr = [["~"] * cols] * rows
+        self.guessArr = [["~"] * cols] * rows
+
+    def printShipGrid(self):
+        for r in self.placeArr:
+            for c in r:
+                print(c, end=" ")
+            print()
+
+    def printGuessGrid(self):
+        for r in self.guessArr:
+            for c in r:
+                print(c, end=" ")
+            print()
 
     def spacesOfShip(self, ship):  # helper method to determine the number of spaces each ship occupies
         if (ship == "D" or ship == "Destroyer"):
@@ -21,88 +31,29 @@ import random
         elif (ship == "A" or ship == "Aircraft Carrier"):
             return 5
 
+# I need to finish this method
+    def checkLegalPlacement( self , row , col , horiz , spaces ):
+        return True
+
+    #I am not sure this works yet
+    def placeShipInGrid( self , row , col , horiz , ship):
+        if (horiz == True):
+            for c in range(0, self.spacesOfShip(ship)):
+                self.placeArr[col + c] = ship
+        elif (horiz == False):
+            for r in range(0, self.spacesOfShip(ship)):
+                self.placeArr[row + r] = ship
+
+
 
     def placeShips(self, ship):  # places ships
         spaces = self.spacesOfShip(ship)
-        xCoor = 0
-        yCoor = 0
+    #code you wrote focusing on computer player
+        xCoor = random.randint(0, 9)
+        yCoor = random.randint(0, 9)
+        direction = random.randint(0, 1)
         horiz = True
-        loopRun = True
-        while(loopRun):
-            if (self.type == "human"):
-                xCoor = input("Enter the x coordinate where ship starts")
-                yCoor = input("Enter the y coordinate where ship starts")
-                horiz = input("Is the ship horizontal? (True/False)")
-            else:
-                xCoor = random.randint(0,9)
-                yCoor = random.randint(0,9)
-                direction = random.randint(0,1)
-                if (direction == 1):
-                    horiz == False
-
-            inGrid = False
-            if (horiz == True & xCoor + spaces < 10):
-                inGrid == True
-            if (horiz == False & yCoor + spaces < 10):
-                inGrid == False
-
-            spaceEmpty = False
-            if (horiz == True):
-                for x in range(0, spaces):
-                    if self.placeArr[[xCoor + x] != "~"]:
-                        spaceEmpty = False
-                        break
-
-            if (horiz == True & xCoor + spaces < 10):
-                inGrid == True
-
-            if(inGrid | spaceEmpty == False ):
-                print("Error, ship does not fit")
-                continue
-
-            else:
-                loopRun = False
-                if (horiz == True):
-                    for x in range(0,spaces):
-                        self.placeArr[xCoor + x] = ship
-                elif (horiz == False):
-                    for x in range(0,spaces):
-                        self.placeArr[yCoor + x] = ship
+        if (direction == 1):
+            horiz = False
 
 
-
-    def makeMoves(self):
-        coorX = 0
-        coorY = 0
-        if (self.type == "human"):
-             coorX = input("Enter the x coordinate you want to attack")
-             coorY = input("Enter the y coordinate you want to attack")
-        else:
-            coorX = random.randint(0,9)
-            coorY =
-            break
-
-            if(inGrid | spaceEmpty == False ):
-                print("Error, ship does not fit")
-                continue
-            else:
-                loopRun = False
-                if (horiz == True):
-                    for x in range(0,spaces):
-                        self.placeArr[xCoor + x] = ship
-                elif (horiz == False):
-                    for x in range(0,spaces):
-                        self.placeArr[yCoor + x] = ship
-
-    def makeMoves(self):
-        coorX = 0
-        coorY = 0
-        if (self.type == "human"):
-             coorX = input("Enter the x coordinate you want to attack")
-             coorY = input("Enter the y coordinate you want to attack")
-        else:
-            coorX = random.randint(0,9)
-            coorY = random.rantint(0,9)
-        self.guessArr[coorX][coorY] =
-
-    def hitOrNot(self, x, y):
