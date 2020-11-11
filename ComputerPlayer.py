@@ -1,2 +1,4 @@
 from Player import Player
-    player1 = Player("comp")
+
+class ComputerPlayer( Player ):
+pass
