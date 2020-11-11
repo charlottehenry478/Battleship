@@ -1,5 +1,7 @@
 class Player:
 
+import random
+
     def __init__(self, t):  # constructor, type is human/computer and both grids
         self.type = t
         rows, cols = (10, 10)
@@ -19,20 +21,19 @@ class Player:
         elif (ship == "A" or ship == "Aircraft Carrier"):
             return 5
 
+
     def placeShips(self, ship):  # places ships
         spaces = self.spacesOfShip(ship)
         xCoor = 0
         yCoor = 0
         horiz = True
         loopRun = True
-
         while(loopRun):
             if (self.type == "human"):
                 xCoor = input("Enter the x coordinate where ship starts")
                 yCoor = input("Enter the y coordinate where ship starts")
                 horiz = input("Is the ship horizontal? (True/False)")
             else:
-                import random
                 xCoor = random.randint(0,9)
                 yCoor = random.randint(0,9)
                 direction = random.randint(0,1)
@@ -47,10 +48,39 @@ class Player:
 
             spaceEmpty = False
             if (horiz == True):
-                for x in range(0,spaces):
+                for x in range(0, spaces):
                     if self.placeArr[[xCoor + x] != "~"]:
                         spaceEmpty = False
                         break
+
+            if (horiz == True & xCoor + spaces < 10):
+                inGrid == True
+
+            if(inGrid | spaceEmpty == False ):
+                print("Error, ship does not fit")
+                continue
+
+            else:
+                loopRun = False
+                if (horiz == True):
+                    for x in range(0,spaces):
+                        self.placeArr[xCoor + x] = ship
+                elif (horiz == False):
+                    for x in range(0,spaces):
+                        self.placeArr[yCoor + x] = ship
+
+
+
+    def makeMoves(self):
+        coorX = 0
+        coorY = 0
+        if (self.type == "human"):
+             coorX = input("Enter the x coordinate you want to attack")
+             coorY = input("Enter the y coordinate you want to attack")
+        else:
+            coorX = random.randint(0,9)
+            coorY =
+            break
 
             if(inGrid | spaceEmpty == False ):
                 print("Error, ship does not fit")
@@ -64,5 +94,15 @@ class Player:
                     for x in range(0,spaces):
                         self.placeArr[yCoor + x] = ship
 
+    def makeMoves(self):
+        coorX = 0
+        coorY = 0
+        if (self.type == "human"):
+             coorX = input("Enter the x coordinate you want to attack")
+             coorY = input("Enter the y coordinate you want to attack")
+        else:
+            coorX = random.randint(0,9)
+            coorY = random.rantint(0,9)
+        self.guessArr[coorX][coorY] =
 
-   # def makeMoves(self):
+    def hitOrNot(self, x, y):
