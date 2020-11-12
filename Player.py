@@ -36,6 +36,9 @@ class Player:
                 print(c, end=" ")
             print()
 
+    def placeShips(self, ship):
+        pass
+
     def spacesOfShip(self, ship):  # helper method to determine the number of spaces each ship occupies
         if (ship == "D" or ship == "Destroyer"):
             return 2
