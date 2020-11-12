@@ -3,7 +3,6 @@ from Player import Player
 class HumanPlayer( Player ):
 
 
-
     def placeShips(self, ship):  # places ships
         while(True):
             row = int(input("Enter the row coordinate where ship starts"))

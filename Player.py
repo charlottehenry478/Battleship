@@ -53,16 +53,22 @@ class Player:
             return 5
 
 
-    def checkLegalPlacement( self , row , col , horiz , ship ):
-        if( horiz == "H"):
+    def checkLegalPlacement( self , row , col , horiz , ship ):  # checks if ship fits legally (fits, and spaces are empty)
+        if( horiz == "H"):  # checks if ship fits in grid horizontally
             if( col + self.spacesOfShip(ship) > 9 ):
                 return False
             else:
+                for a in range(col, self.spacesOfShip(ship)):
+                    if self.shipGrid[a, col] != "~":
+                        return False
                 return True
-        else:
+        else:  # checks if ship fits in grid vertically
             if (row + self.spacesOfShip(ship) > 9):
                 return False
             else:
+                for a in range(row, self.spacesOfShip(ship)):
+                    if self.shipGrid[a, col] != "~":
+                        return False
                 return True
 
 
