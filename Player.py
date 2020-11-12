@@ -37,7 +37,8 @@ class Player:
             print()
 
     def placeShips(self, ship):
-        pass
+        pass    #this just means the method doesn't do anything, its just a placeholder for the
+                #subclasses to overwrite
 
     def spacesOfShip(self, ship):  # helper method to determine the number of spaces each ship occupies
         if (ship == "D" or ship == "Destroyer"):
