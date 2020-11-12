@@ -3,18 +3,35 @@ import random
 class Player:
 
     def __init__(self):
-        rows, cols = (10, 10)
-        self.placeArr = [["~"] * cols] * rows
-        self.guessArr = [["~"] * cols] * rows
+        self.shipGrid = [["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"] ]
+        self.guessGrid = [["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"],
+                          ["~","~","~","~","~","~","~","~","~","~"] ]
 
     def printShipGrid(self):
-        for r in self.placeArr:
+        for r in self.shipGrid:
             for c in r:
                 print(c, end=" ")
             print()
 
     def printGuessGrid(self):
-        for r in self.guessArr:
+        for r in self.guessGrid:
             for c in r:
                 print(c, end=" ")
             print()
@@ -31,29 +48,32 @@ class Player:
         elif (ship == "A" or ship == "Aircraft Carrier"):
             return 5
 
-# I need to finish this method
-    def checkLegalPlacement( self , row , col , horiz , spaces ):
-        return True
 
-    #I am not sure this works yet
+    def checkLegalPlacement( self , row , col , horiz , ship ):
+        if( horiz == "H"):
+            if( col + self.spacesOfShip(ship) > 9 ):
+                return False
+            else:
+                return True
+        else:
+            if (row + self.spacesOfShip(ship) > 9):
+                return False
+            else:
+                return True
+
+
+
     def placeShipInGrid( self , row , col , horiz , ship):
-        if (horiz == True):
-            for c in range(0, self.spacesOfShip(ship)):
-                self.placeArr[col + c] = ship
-        elif (horiz == False):
-            for r in range(0, self.spacesOfShip(ship)):
-                self.placeArr[row + r] = ship
+        if (horiz == "H"):
+            for c in range(col, col + self.spacesOfShip(ship)):
+                self.shipGrid[row][c] = ship
+        elif (horiz == "V"):
+            for r in range(row, row + self.spacesOfShip(ship)):
+                self.shipGrid[r][col] = ship
 
 
 
-    def placeShips(self, ship):  # places ships
-        spaces = self.spacesOfShip(ship)
-    #code you wrote focusing on computer player
-        xCoor = random.randint(0, 9)
-        yCoor = random.randint(0, 9)
-        direction = random.randint(0, 1)
-        horiz = True
-        if (direction == 1):
-            horiz = False
+
+
 
 
