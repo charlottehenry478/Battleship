@@ -25,13 +25,13 @@ class Player:
                           ["~","~","~","~","~","~","~","~","~","~"] ]
         hitCount = 0
 
-    def printShipGrid(self):
+    def printShipGrid(self): #prints where the player places the ship on the board
         for r in self.shipGrid:
             for c in r:
                 print(c, end=" ")
             print()
 
-    def printGuessGrid(self):
+    def printGuessGrid(self): #prints where the player has guessed about where their opponent's ship is
         for r in self.guessGrid:
             for c in r:
                 print(c, end=" ")
@@ -74,7 +74,7 @@ class Player:
 
 
 
-    def placeShipInGrid( self , row , col , horiz , ship):
+    def placeShipInGrid( self , row , col , horiz , ship):#this method will place the ships on the board
         if (horiz == "H"):
             for c in range(col, col + self.spacesOfShip(ship)):
                 self.shipGrid[row][c] = ship
@@ -82,10 +82,10 @@ class Player:
             for r in range(row, row + self.spacesOfShip(ship)):
                 self.shipGrid[r][col] = ship
 
-    def makeGuess(self):
+    def makeGuess(self):#this method is overwritten in the ComputerPlayer and HumanPlayer classes
         pass
 
-    def legalGuess(self, row, col):
+    def legalGuess(self, row, col):#confirms whether or not the guess is valid
         if self.guessGrid[row, col] == "x":
             return False
 

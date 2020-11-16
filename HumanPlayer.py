@@ -19,7 +19,7 @@ class HumanPlayer( Player ):
             self.placeShipInGrid( row , col , horiz , ship)
             break
 
-    def makeGuess(self):
+    def makeGuess(self) :#generates a guess from user input about where the Computer Player's ship will be
         while(True):
             guessRow = str(input("Please enter your guess for the row"))
             guessCol = str(input("Please enter your guess for the column"))

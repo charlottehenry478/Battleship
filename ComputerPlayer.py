@@ -20,7 +20,7 @@ class ComputerPlayer( Player ):
             self.placeShipInGrid(row, col, horiz, ship)
             break
 
-    def makeGuess(self):
+    def makeGuess(self): #this will generate a random guess by the Computer Player for the Human Player
         while(True):
             guessRow = random.randint(0, 9)
             guessCol = random.randint(0, 9)
