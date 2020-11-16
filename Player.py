@@ -23,6 +23,7 @@ class Player:
                           ["~","~","~","~","~","~","~","~","~","~"],
                           ["~","~","~","~","~","~","~","~","~","~"],
                           ["~","~","~","~","~","~","~","~","~","~"] ]
+        hitCount = 0
 
     def printShipGrid(self):
         for r in self.shipGrid:
@@ -80,13 +81,23 @@ class Player:
         elif (horiz == "V"):
             for r in range(row, row + self.spacesOfShip(ship)):
                 self.shipGrid[r][col] = ship
-                
-    def takeShots(self, oppBoard, row, col,):
-
 
     def makeGuess(self):
         pass
 
+    def legalGuess(self, row, col):
+        if self.guessGrid[row, col] == "x":
+            return False
+
+    def takeShots(self, oppBoard, guessCoordinates):  # oppBoard is opponent board, guessCoordinates is an array returned from makeGuess method
+        row = guessCoordinates[0]
+        col = guessCoordinates[1]
+        if oppBoard[row, col] == "~":
+            print("Miss")
+            self.guessGrid[row, col] = "x"
+        elif oppBoard[row, col] != "~":
+            print("Hit!")
+            self.hitCount += 1
 
 
 

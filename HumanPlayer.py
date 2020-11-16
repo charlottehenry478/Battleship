@@ -20,9 +20,12 @@ class HumanPlayer( Player ):
             break
 
     def makeGuess(self):
-        guessRow = str(input("Please enter your guess for the row"))
-        guessCol = str(input("Please enter your guess for the column"))
-        return guessRow + guessCol
+        while(True):
+            guessRow = str(input("Please enter your guess for the row"))
+            guessCol = str(input("Please enter your guess for the column"))
+            if self.legalGuess(guessRow, guessCol) == False:
+                continue
+        return [guessRow, guessCol]
 
 
 

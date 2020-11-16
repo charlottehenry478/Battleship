@@ -21,6 +21,9 @@ class ComputerPlayer( Player ):
             break
 
     def makeGuess(self):
-        guessRow = random.randint(0, 9)
-        guessCol = random.randint(0, 9)
-        return str(guessRow) + str(guessCol)
+        while(True):
+            guessRow = random.randint(0, 9)
+            guessCol = random.randint(0, 9)
+            if self.legalGuess(guessRow, guessCol) == False:
+                continue
+        return [guessRow, guessCol]
