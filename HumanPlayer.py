@@ -19,6 +19,11 @@ class HumanPlayer( Player ):
             self.placeShipInGrid( row , col , horiz , ship)
             break
 
+    def makeGuess(self):
+        guessRow = str(input("Please enter your guess for the row"))
+        guessCol = str(input("Please enter your guess for the column"))
+        return guessRow + guessCol
+
 
 
 

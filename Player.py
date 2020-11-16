@@ -80,6 +80,13 @@ class Player:
         elif (horiz == "V"):
             for r in range(row, row + self.spacesOfShip(ship)):
                 self.shipGrid[r][col] = ship
+                
+    def takeShots(self, oppBoard, row, col,):
+
+
+    def makeGuess(self):
+        pass
+
 
 
 

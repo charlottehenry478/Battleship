@@ -19,3 +19,8 @@ class ComputerPlayer( Player ):
                 continue
             self.placeShipInGrid(row, col, horiz, ship)
             break
+
+    def makeGuess(self):
+        guessRow = random.randint(0, 9)
+        guessCol = random.randint(0, 9)
+        return str(guessRow) + str(guessCol)
