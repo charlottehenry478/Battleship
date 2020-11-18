@@ -40,6 +40,9 @@ class Player:
                 print(c, end=" ")
             print()
 
+    def hitCount(self):
+        return self.hitCount
+
     def placeShips(self, ship):
         # this just means the method doesn't do anything, its just a placeholder for the
         # subclasses to overwrite
@@ -64,7 +67,7 @@ class Player:
                 return False
             else:  # if ship fits
                 for a in range(col, self.spacesOfShip(ship)):  # checks if there is a ship there already
-                    if self.shipGrid[a, col] != "~":  # if there is already a ship placed
+                    if self.shipGrid[row, a] != "~":  # if there is already a ship placed
                         return False
                 return True
         else:  # checks if ship fits in grid vertically
@@ -110,11 +113,5 @@ class Player:
         elif oppBoard[row, col] != "~":  # if they hit
             print("Hit!")
             self.guessGrid[row,col] = "x"
+            oppBoard[row, col] = "x"
             self.hitCount += 1
-
-
-
-
-
-
-
