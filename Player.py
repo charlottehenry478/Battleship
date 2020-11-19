@@ -26,7 +26,7 @@ class Player:
                           ["~","~","~","~","~","~","~","~","~","~"],
                           ["~","~","~","~","~","~","~","~","~","~"],
                           ["~","~","~","~","~","~","~","~","~","~"] ]
-        hitCount = 0
+        self.hitCount = 0
 
     def printShipGrid(self): #prints where the player places the ship on the board
         for r in self.shipGrid:  # traverses grid to print
@@ -40,7 +40,7 @@ class Player:
                 print(c, end=" ")
             print()
 
-    def hitCount(self):
+    def getHitCount(self):
         return self.hitCount
 
     def placeShips(self, ship):
@@ -67,7 +67,7 @@ class Player:
                 return False
             else:  # if ship fits
                 for a in range(col, col + self.spacesOfShip(ship)):  # checks if there is a ship there already
-                    if self.shipGrid[row, a] != "~":  # if there is already a ship placed
+                    if self.shipGrid[row][a] != "~":  # if there is already a ship placed
                         return False
                 return True
         else:  # checks if ship fits in grid vertically
@@ -75,7 +75,7 @@ class Player:
                 return False
             else:  # if ship fits
                 for a in range(row, row + self.spacesOfShip(ship)):  # checks if there is a ship there already
-                    if self.shipGrid[a, col] != "~": # if there is already a ship placed
+                    if self.shipGrid[a][col] != "~": # if there is already a ship placed
                         return False
                 return True
 
@@ -99,7 +99,7 @@ class Player:
             return False
         if (col < 0 or col > 9):  # if guess is out of bounds
             return False
-        if self.guessGrid[row, col] == "x" or self.guessGrid[row, col] == "-":
+        if self.guessGrid[row][col] == "x" or self.guessGrid[row][col] == "-":
         # if they have already guessed this space
             return False
 
@@ -107,15 +107,15 @@ class Player:
         # oppBoard is opponent board, guessCoordinates is an array returned from makeGuess method
         row = guess[0]
         col = guess[1]
-        if opponent.shipGrid[row, col] == "~":  # if they miss
+        if opponent.shipGrid[row][col] == "~":  # if they miss
             print("Miss")
-            self.guessGrid[row, col] = "-"
-            opponent.shipGrid[row, col] = "-"
-        elif opponent.shipGrid[row, col] != "~":  # if they hit
+            self.guessGrid[row][col] = "-"
+            opponent.shipGrid[row][col] = "-"
+        elif opponent.shipGrid[row][col] != "~":  # if they hit
             print("Hit!")
-            letter = opponent.shipGrid[row, col]
-            self.guessGrid[row,col] = "x"
-            opponent.shipGrid[row, col] = "x"
+            letter = opponent.shipGrid[row][col]
+            self.guessGrid[row][col] = "x"
+            opponent.shipGrid[row][col] = "x"
             self.hitCount += 1
             if self.sunkShip(letter, opponent) == True:
                 print("You sunk " + letter)
