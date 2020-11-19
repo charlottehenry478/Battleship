@@ -66,7 +66,7 @@ class Player:
             if( col + self.spacesOfShip(ship) > 9 ):  # if ship doesn't fit
                 return False
             else:  # if ship fits
-                for a in range(col, self.spacesOfShip(ship)):  # checks if there is a ship there already
+                for a in range(col, col + self.spacesOfShip(ship)):  # checks if there is a ship there already
                     if self.shipGrid[row, a] != "~":  # if there is already a ship placed
                         return False
                 return True
@@ -74,7 +74,7 @@ class Player:
             if (row + self.spacesOfShip(ship) > 9):  # if ship doesn't fit
                 return False
             else:  # if ship fits
-                for a in range(row, self.spacesOfShip(ship)):  # checks if there is a ship there already
+                for a in range(row, row + self.spacesOfShip(ship)):  # checks if there is a ship there already
                     if self.shipGrid[a, col] != "~": # if there is already a ship placed
                         return False
                 return True
@@ -103,15 +103,26 @@ class Player:
         # if they have already guessed this space
             return False
 
-    def takeShots(self, oppBoard, guess):  # method that actually takes shots at opponent's ships
+    def takeShots(self, opponent, guess):  # method that actually takes shots at opponent's ships
         # oppBoard is opponent board, guessCoordinates is an array returned from makeGuess method
         row = guess[0]
         col = guess[1]
-        if oppBoard[row, col] == "~":  # if they miss
+        if opponent.shipGrid[row, col] == "~":  # if they miss
             print("Miss")
             self.guessGrid[row, col] = "-"
-        elif oppBoard[row, col] != "~":  # if they hit
+            opponent.shipGrid[row, col] = "-"
+        elif opponent.shipGrid[row, col] != "~":  # if they hit
             print("Hit!")
+            letter = opponent.shipGrid[row, col]
             self.guessGrid[row,col] = "x"
-            oppBoard[row, col] = "x"
+            opponent.shipGrid[row, col] = "x"
             self.hitCount += 1
+            if self.sunkShip(letter, opponent) == True:
+                print("You sunk " + letter)
+
+
+    def sunkShip(self, ship, opponent):
+        for x in opponent.shipGrid:
+            if x == ship:
+                return False
+        return True
