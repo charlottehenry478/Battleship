@@ -23,11 +23,13 @@ class HumanPlayer( Player ):
             break
 
     def makeGuess(self) :#generates a guess from user input about where the Computer Player's ship will be
-        while(True):
+        while(True):  # gets user input for guess
             guessRow = int(input("Please enter your guess for the row"))
             guessCol = int(input("Please enter your guess for the column"))
             if self.legalGuess(guessRow, guessCol) == False:  # if guess is invalid
                 continue
+            else:  # if guess is valid
+                break
         return [guessRow, guessCol]
 
 

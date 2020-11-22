@@ -3,11 +3,10 @@ from ComputerPlayer import ComputerPlayer
 
 print("Welcome to Battleship!")
 
-print("Player one place ships now:")
 human = HumanPlayer()
 computer = ComputerPlayer()
 
-human.printGuessGrid()
+print("Player one place ships now:")
 human.printShipGrid()
 print("Place destroyer")
 human.placeShips("D")
@@ -25,28 +24,33 @@ print("Place aircraft carrier")
 human.placeShips("A")
 human.printShipGrid()
 
-print("Player two place ships now:")
+print("Player two place ships now.")
 computer.placeShips("D")
 computer.placeShips("S")
 computer.placeShips("C")
 computer.placeShips("B")
 computer.placeShips("A")
 
-humanHits = human.getHitCount()
-computerHits = computer.getHitCount()
-
-while(humanHits < 17 and computerHits < 17):
+while(True):  # after ships are placed, this loop runs the game until one player wins
     print("Player one make guess:")
-    human.makeGuess()
+    print("Your guess grid:")
     human.printGuessGrid()
+    guess1 = human.makeGuess()
+    human.takeShots(computer, guess1)
+    print()
+
+    print("Player two make guess.")
+    guess2 = computer.makeGuess()
+    computer.takeShots(human, guess2)
+    print("Your ship grid:")
     human.printShipGrid()
-    humanHits = human.getHitCount()
 
-    print("Player two make guess:")
-    computer.makeGuess()
-    computerHits = computer.getHitCount()
+    if(human.getHitCount() == 17):  # if the human has sunk every ship
+        break
+    elif(computer.getHitCount() == 17):  # if the computer has sunk every ship
+        break
 
-if(humanHits >= 17):
+if(human.getHitCount() >= 17):  # if the human won
     print("Congratulations, player one won!")
-else:
+else:  # if the computer won
     print("Player two won. Better luck next time!")

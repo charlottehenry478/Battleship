@@ -40,7 +40,7 @@ class Player:
                 print(c, end=" ")
             print()
 
-    def getHitCount(self):
+    def getHitCount(self):  # accessor method to return the hit count
         return self.hitCount
 
     def placeShips(self, ship):
@@ -99,7 +99,7 @@ class Player:
             return False
         if (col < 0 or col > 9):  # if guess is out of bounds
             return False
-        if self.guessGrid[row][col] == "x" or self.guessGrid[row][col] == "-":
+        if self.guessGrid[row][col] == "x" or self.guessGrid[row][col] == "m":
         # if they have already guessed this space
             return False
 
@@ -109,20 +109,23 @@ class Player:
         col = guess[1]
         if opponent.shipGrid[row][col] == "~":  # if they miss
             print("Miss")
-            self.guessGrid[row][col] = "-"
-            opponent.shipGrid[row][col] = "-"
+            self.guessGrid[row][col] = "m"
+            opponent.shipGrid[row][col] = "m"
         elif opponent.shipGrid[row][col] != "~":  # if they hit
             print("Hit!")
             letter = opponent.shipGrid[row][col]
             self.guessGrid[row][col] = "x"
             opponent.shipGrid[row][col] = "x"
             self.hitCount += 1
-            if self.sunkShip(letter, opponent) == True:
+            if self.sunkShip(letter, opponent) == True:  # if the ship is fully sunk
                 print("You sunk " + letter)
+            else:  # if the ship is not fully sunk
+                print("You hit " + letter)
 
 
-    def sunkShip(self, ship, opponent):
-        for x in opponent.shipGrid:
-            if x == ship:
-                return False
+    def sunkShip(self, ship, opponent): # checks if a ship has been fully sunk
+        for x in range(0,9):  # traverses the grid
+            for y in range(0,9):
+                if opponent.shipGrid[x][y] == ship:
+                    return False
         return True
